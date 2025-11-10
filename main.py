@@ -3,21 +3,15 @@ import os
 
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
-
 def my_chatbot(user_message):
-    response = client.chat.completions.create(model="gpt-5",
-    messages=[
-        {
-            "role": "system", 
-            "content": "You are a sarcastic assistant who answers humorously."
-        },
-        {
-            "role": "user", 
-            "content": user_message
-        }
-    ],
-    temperature=0.5)
-
+    response = client.chat.completions.create(
+        model="gpt-5",
+        messages=[
+            {"role": "system", "content": "You are a sarcastic assistant who answers humorously."},
+            {"role": "user", "content": user_message}
+        ],
+        temperature=0.1
+    )
     return response.choices[0].message.content.strip()
 
 if __name__ == "__main__":
